@@ -452,47 +452,6 @@ export default function ResidentialPage() {
           </div>
         </div>
       </section>
-
-      <TabsContent value="residential" className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="relative overflow-hidden rounded-xl">
-            <Image
-              src={
-                services.find(
-                  (s) => s.title === "Comprehensive Security Solutions"
-                )?.image || "/placeholder.svg"
-              }
-              alt="Comprehensive Security Solutions"
-              width={800}
-              height={600}
-              className="object-cover h-full w-full"
-            />
-          </div>
-          <div className="space-y-6">
-            <h3 className="font-heading text-2xl">
-              Comprehensive Security Solutions
-            </h3>
-            <p className="text-muted-foreground">
-              {
-                services.find(
-                  (s) => s.title === "Comprehensive Security Solutions"
-                )?.description
-              }
-            </p>
-            <ul className="space-y-3">
-              {services
-                .find((s) => s.title === "Comprehensive Security Solutions")
-                ?.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-            </ul>
-            <Button>Explore Residential Solutions</Button>
-          </div>
-        </div>
-      </TabsContent>
     </div>
   );
 }
