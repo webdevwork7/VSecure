@@ -14,7 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ResidentialPage() {
   const heroRef = useRef(null);
@@ -223,52 +223,61 @@ export default function ResidentialPage() {
               </p>
             </motion.div>
           </div>
-
-          <div className="space-y-16">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                <div className={`${index % 2 === 1 ? "md:order-2" : ""}`}>
-                  <div className="relative rounded-xl overflow-hidden">
-                    <Image
-                      src={service.image || "/placeholder.svg"}
-                      alt={service.title}
-                      width={600}
-                      height={400}
-                      className="object-cover w-full h-auto"
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className={`space-y-6 ${index % 2 === 1 ? "md:order-1" : ""}`}
-                >
-                  <h3 className="font-heading text-2xl">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.description}</p>
-
-                  <ul className="space-y-3">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button>
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <Tabs defaultValue="residential" className="max-w-5xl mx-auto">
+            <TabsList className="grid w-full grid-cols-1 mb-8">
+              <TabsTrigger value="residential">
+                Residential Solutions
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="residential" className="space-y-8">
+              <div className="space-y-16">
+                {services.map((service, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={servicesInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.1 * index }}
+                    className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
+                      index % 2 === 1 ? "md:flex-row-reverse" : ""
+                    }`}
+                  >
+                    <div className={`${index % 2 === 1 ? "md:order-2" : ""}`}>
+                      <div className="relative rounded-xl overflow-hidden">
+                        <Image
+                          src={service.image || "/placeholder.svg"}
+                          alt={service.title}
+                          width={600}
+                          height={400}
+                          className="object-cover w-full h-auto"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className={`space-y-6 ${
+                        index % 2 === 1 ? "md:order-1" : ""
+                      }`}
+                    >
+                      <h3 className="font-heading text-2xl">{service.title}</h3>
+                      <p className="text-muted-foreground">
+                        {service.description}
+                      </p>
+                      <ul className="space-y-3">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5 shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Button>
+                        Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
